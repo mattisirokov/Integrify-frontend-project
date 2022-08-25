@@ -11,7 +11,7 @@ To install, run:
 yarn install
 ```
 
-To run the project, run
+To run the project, run:
 
 ````bash
 yarn start
