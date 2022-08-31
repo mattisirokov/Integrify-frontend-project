@@ -7,9 +7,12 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
-import FormGroup from '@mui/material/FormGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
+
+import { useTheme } from '@mui/material/styles'
+import Brightness4Icon from '@mui/icons-material/Brightness4'
+import Brightness7Icon from '@mui/icons-material/Brightness7'
+import { Link } from 'react-router-dom'
+import { ColorModeContext } from '../context/ColorModeContext'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,6 +57,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 export default function SearchAppBar() {
+  const theme = useTheme()
+  const { toggleColorMode } = React.useContext(ColorModeContext)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -65,22 +70,23 @@ export default function SearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           ></IconButton>
+
           <Typography
             variant="h5"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Countries Table
+            <Link to="/">Countries Table</Link>
           </Typography>
 
-          <FormGroup>
-            <FormControlLabel
-              control={<Switch defaultChecked color="default" />}
-              label="Dark mode"
-              labelPlacement="start"
-            />
-          </FormGroup>
+          <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+            {theme.palette.mode === 'dark' ? (
+              <Brightness7Icon />
+            ) : (
+              <Brightness4Icon />
+            )}
+          </IconButton>
 
           <Search>
             <SearchIconWrapper>

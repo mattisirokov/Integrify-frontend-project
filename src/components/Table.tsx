@@ -14,6 +14,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import { fetchCountriesThunk } from '../redux/slices/fetchSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
+import { Link } from 'react-router-dom'
 
 export default function MainTable() {
   const dispatch = useDispatch<AppDispatch>()
@@ -76,9 +77,11 @@ export default function MainTable() {
               </TableCell>
               <TableCell align="right">{country.capital.join(`, `)}</TableCell>
               <TableCell align="right">
-                <Button size="small" variant="outlined">
-                  Details
-                </Button>
+                <Link to={`/countries/${country.name.common}`}>
+                  <Button size="small" variant="outlined">
+                    Details
+                  </Button>
+                </Link>
               </TableCell>
 
               <TableCell align="right">

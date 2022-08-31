@@ -7,7 +7,7 @@ import Country from './pages/SingleCountry'
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route exact path="/products/:name" component={Country} />
+    <Route exact path="/countries/:name" component={Country} />
   </Switch>
 )
 

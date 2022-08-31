@@ -33,7 +33,19 @@ export const fetchCountriesThunk = createAsyncThunk(
     const query = `fields=name,languages,currencies,flags,capital`
     const URL = `https://restcountries.com/v3.1/all?${query}`
     const response = await axios.get(URL)
-    console.log('response: ', response)
+
+    return {
+      data: response.data,
+      status: response.status,
+    }
+  }
+)
+export const fetchCountryThunk = createAsyncThunk(
+  'countries/fetch',
+  async (name: string) => {
+    const URL = `https://restcountries.com/v3.1/name/${name}`
+    const response = await axios.get(URL)
+
     return {
       data: response.data,
       status: response.status,

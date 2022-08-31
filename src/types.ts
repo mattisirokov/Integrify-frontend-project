@@ -1,6 +1,6 @@
 // Action types
-export const ADD_PRODUCT = 'ADD_PRODUCT'
-export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
+export const ADD_COUNTRY = 'ADD_COUNTRY'
+export const REMOVE_COUNTRY = 'REMOVE_COUNTRY'
 export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 
 // Enum
@@ -10,42 +10,40 @@ export enum DialogType {
 }
 
 // A product
-export type Product = {
+export type Country = {
   id: string
   name: string
-  price: number
+  population: number
 }
 
-export type AddProductAction = {
-  type: typeof ADD_PRODUCT
+export type AddCountryAction = {
+  type: typeof ADD_COUNTRY
   payload: {
-    product: Product,
+    product: Country
   }
 }
 
-export type RemoveProductAction = {
-  type: typeof REMOVE_PRODUCT
+export type RemoveCountryAction = {
+  type: typeof REMOVE_COUNTRY
   payload: {
-    product: Product,
+    product: Country
   }
 }
 
 export type ToggleDialogAction = {
   type: typeof TOGGLE_DIALOG
   payload: {
-    dialog: DialogType,
+    dialog: DialogType
   }
 }
 
 export type UiActions = ToggleDialogAction
 
 // Use this union in reducer
-export type ProductActions =
-  | AddProductAction
-  | RemoveProductAction
+export type ProductActions = AddCountryAction | RemoveCountryAction
 
 export type ProductState = {
-  inCart: Product[]
+  inCart: Country[]
 }
 
 // Using dynamic keys from an enum
@@ -56,6 +54,6 @@ export type UiState = {
 }
 
 export type AppState = {
-  product: ProductState,
-  ui: UiState,
+  product: ProductState
+  ui: UiState
 }
