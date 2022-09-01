@@ -53,6 +53,19 @@ export const fetchCountryThunk = createAsyncThunk(
   }
 )
 
+export const fetchCountrySearch = createAsyncThunk(
+  'countries/fetch',
+  async (term: string) => {
+    const URL = `https://restcountries.com/v3.1/name/${term}/?fields=name,languages,currencies,flags,capital`
+    const response = await axios.get(URL)
+
+    return {
+      data: response.data,
+      status: response.status,
+    }
+  }
+)
+
 export const fetchSlice = createSlice({
   name: 'countries',
   initialState,
