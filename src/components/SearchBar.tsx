@@ -56,6 +56,9 @@ export default function SearchBar() {
 
   const searchHandler = (e: any) => {
     setTerm(e.target.value)
+    if (term !== '') {
+      dispatch(fetchCountrySearch(term))
+    }
   }
 
   useEffect(() => {
