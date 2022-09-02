@@ -17,6 +17,8 @@ export type Country = {
   flags: {
     png: string
   }
+
+  population: number
 }
 
 export interface countriesState {
@@ -30,7 +32,7 @@ const initialState: countriesState = {
 export const fetchCountriesThunk = createAsyncThunk(
   'countries/fetch',
   async () => {
-    const query = `fields=name,languages,currencies,flags,capital`
+    const query = `fields=name,languages,currencies,flags,capital,population`
     const URL = `https://restcountries.com/v3.1/all?${query}`
     const response = await axios.get(URL)
 
@@ -56,7 +58,7 @@ export const fetchCountryThunk = createAsyncThunk(
 export const fetchCountrySearch = createAsyncThunk(
   'countries/fetch',
   async (term: string) => {
-    const URL = `https://restcountries.com/v3.1/name/${term}/?fields=name,languages,currencies,flags,capital`
+    const URL = `https://restcountries.com/v3.1/name/${term}/?fields=name,languages,currencies,flags,capital,population`
     const response = await axios.get(URL)
 
     return {
