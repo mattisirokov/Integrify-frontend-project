@@ -42,7 +42,7 @@ export default function MainTable() {
               <h4>Currency</h4>
             </TableCell>
             <TableCell align="right">
-              <h4>Capital(s)</h4>
+              <h4>Population</h4>
             </TableCell>
             <TableCell align="right"></TableCell>
             <TableCell align="right"></TableCell>
@@ -75,7 +75,7 @@ export default function MainTable() {
                   (currency) => currency.name
                 )}
               </TableCell>
-              <TableCell align="right">{country.capital.join(`, `)}</TableCell>
+              <TableCell align="right">{country.population}</TableCell>
               <TableCell align="right">
                 <Link to={`/countries/${country.name.common}`}>
                   <Button size="small" variant="outlined">
