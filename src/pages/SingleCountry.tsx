@@ -21,8 +21,6 @@ export default function SingleCountry() {
   const { countries } = useSelector((state: RootState) => state)
   const { name } = useParams<Parameter>()
 
-  //same as in table component, but with a single country
-
   useEffect(() => {
     dispatch(fetchCountryThunk(name))
   }, [dispatch, name])
