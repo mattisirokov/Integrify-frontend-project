@@ -8,12 +8,9 @@ import ListItem from '@mui/material/ListItem'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 
 import ListItemText from '@mui/material/ListItemText'
-import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import StyledBadge from '@mui/material/Badge'
-
-import FolderIcon from '@mui/icons-material/Folder'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
@@ -36,7 +33,8 @@ export default function BasicModal() {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  const cart = useSelector((state: RootState) => state.cart)
+
+  const { items } = useSelector((state: RootState) => state.cart)
   const handleRemoveFromCart = (item: any) => {
     dispatch(removeFromCart(item))
   }
@@ -44,7 +42,7 @@ export default function BasicModal() {
   return (
     <div>
       <IconButton onClick={handleOpen}>
-        <StyledBadge badgeContent={cart.items.length} color="secondary">
+        <StyledBadge badgeContent={items.length} color="secondary">
           <ShoppingCartIcon />
         </StyledBadge>
       </IconButton>
@@ -60,19 +58,25 @@ export default function BasicModal() {
           </Typography>
 
           <List>
-            {cart.items.length === 0 ? (
+            {items.length === 0 ? (
               <ListItem>
                 <ListItemText secondary="Your cart is currently empty" />
               </ListItem>
             ) : (
-              cart.items.map((item) => (
+              items.map((item: any) => (
                 <ListItem>
                   <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
+                    <img
+                      src={item.flags.png}
+                      alt={item.name.common}
+                      style={{
+                        width: '35px',
+                        height: '35px',
+                        borderRadius: '100%',
+                      }}
+                    ></img>
                   </ListItemAvatar>
-                  <ListItemText primary="Name" />
+                  <ListItemText primary={item.name.common} />
                   <IconButton
                     edge="end"
                     aria-label="delete"
