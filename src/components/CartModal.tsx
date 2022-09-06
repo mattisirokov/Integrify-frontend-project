@@ -11,6 +11,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import StyledBadge from '@mui/material/Badge'
 
 import FolderIcon from '@mui/icons-material/Folder'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -43,7 +44,9 @@ export default function BasicModal() {
   return (
     <div>
       <IconButton onClick={handleOpen}>
-        <ShoppingCartIcon />
+        <StyledBadge badgeContent={cart.items.length} color="secondary">
+          <ShoppingCartIcon />
+        </StyledBadge>
       </IconButton>
       <Modal
         open={open}
