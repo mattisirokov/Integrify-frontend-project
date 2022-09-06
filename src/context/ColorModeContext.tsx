@@ -13,7 +13,7 @@ export type Theme = 'light' | 'dark'
 export default function ColorModeProvider({
   children,
 }: ColorModeProviderProps) {
-  const [mode, setMode] = React.useState<Theme>('light')
+  const [mode, setMode] = React.useState<Theme>('dark')
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {

@@ -9,38 +9,28 @@ export enum DialogType {
   SignUp = 'signUp',
 }
 
-// A product
+// A single country
 export type Country = {
   id: string
   name: string
   population: number
+  fifa: string
+  region: string
 }
 
-export type AddCountryAction = {
-  type: typeof ADD_COUNTRY
-  payload: {
-    product: Country
+export type Cart = {
+  name: {
+    common: string
+  }
+  flags: {
+    png: string
   }
 }
 
-export type RemoveCountryAction = {
-  type: typeof REMOVE_COUNTRY
-  payload: {
-    product: Country
-  }
+export interface CartState {
+  items: Cart[]
+  amount: number
 }
-
-export type ToggleDialogAction = {
-  type: typeof TOGGLE_DIALOG
-  payload: {
-    dialog: DialogType
-  }
-}
-
-export type UiActions = ToggleDialogAction
-
-// Use this union in reducer
-export type ProductActions = AddCountryAction | RemoveCountryAction
 
 export type ProductState = {
   inCart: Country[]

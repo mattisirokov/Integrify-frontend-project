@@ -11,12 +11,9 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { ColorModeContext } from '../context/ColorModeContext'
 
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-
 import SearchBar from './SearchBar'
+import Dropdown from './Dropdown'
+import CartModal from './CartModal'
 
 export default function SearchAppBar() {
   const theme = useTheme()
@@ -41,25 +38,9 @@ export default function SearchAppBar() {
               <Brightness4Icon />
             )}
           </IconButton>
+          <CartModal />
 
-          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="demo-select-small">Sort by</InputLabel>
-            <Select
-              labelId="demo-select-small"
-              id="demo-select-small"
-              label="Sort by"
-              //onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Sort A-Z</MenuItem>
-              <MenuItem value={20}>Sort Z-A</MenuItem>
-              <MenuItem value={30}>Sort small-large</MenuItem>
-              <MenuItem value={40}>Sort large-small</MenuItem>
-            </Select>
-          </FormControl>
-
+          <Dropdown />
           <SearchBar />
         </Toolbar>
       </AppBar>

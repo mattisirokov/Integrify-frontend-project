@@ -15,10 +15,14 @@ import { fetchCountriesThunk } from '../redux/slices/fetchSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
 import { Link } from 'react-router-dom'
+import { addToCart } from '../redux/slices/cartSlice'
 
 export default function MainTable() {
   const dispatch = useDispatch<AppDispatch>()
   const { countries } = useSelector((state: RootState) => state)
+  const handleAddToCart = (country: any) => {
+    dispatch(addToCart(country))
+  }
 
   useEffect(() => {
     dispatch(fetchCountriesThunk())
@@ -49,7 +53,7 @@ export default function MainTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {countries.items.map((country) => (
+          {countries.countries.map((country) => (
             <TableRow
               key={country.name.common}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -85,7 +89,10 @@ export default function MainTable() {
               </TableCell>
 
               <TableCell align="right">
-                <IconButton aria-label="add to shopping cart">
+                <IconButton
+                  aria-label="add to shopping cart"
+                  onClick={() => handleAddToCart(country)}
+                >
                   <AddShoppingCartIcon />
                 </IconButton>
               </TableCell>

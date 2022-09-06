@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import countriesReducer from './slices/fetchSlice'
+import cartReducer from './slices/cartSlice'
 
 export const store = configureStore({
   reducer: {
     countries: countriesReducer,
+    cart: cartReducer,
   },
 })
 
