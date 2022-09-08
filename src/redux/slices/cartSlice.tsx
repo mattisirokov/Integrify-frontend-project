@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { CartState, Cart } from '../../types'
 
-const initialState = {
+const initialState: CartState = {
   items: [],
   amount: 0,
 }
