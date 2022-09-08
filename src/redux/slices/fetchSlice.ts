@@ -83,8 +83,7 @@ export const sortedCountries = createSlice({
         state.countries.sort((a, b) =>
           a.name.common.localeCompare(b.name.common)
         )
-      }
-      if (action.payload === `Z-to-A`) {
+      } else if (action.payload === `Z-to-A`) {
         state.countries.sort((a, b) =>
           b.name.common.localeCompare(a.name.common)
         )
@@ -93,8 +92,7 @@ export const sortedCountries = createSlice({
     SortedPopulation: (state, action) => {
       if (action.payload === 'small-to-large') {
         state.countries.sort((a, b) => a.population - b.population)
-      }
-      if (action.payload === 'large-to-small') {
+      } else if (action.payload === 'large-to-small') {
         state.countries.sort((a, b) => b.population - a.population)
       }
     },

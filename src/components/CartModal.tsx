@@ -1,17 +1,18 @@
 import * as React from 'react'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Modal from '@mui/material/Modal'
-
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-
-import ListItemText from '@mui/material/ListItemText'
-import IconButton from '@mui/material/IconButton'
+import {
+  Box,
+  Typography,
+  Modal,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  IconButton,
+} from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import StyledBadge from '@mui/material/Badge'
-import DeleteIcon from '@mui/icons-material/Delete'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
 import { removeFromCart } from '../redux/slices/cartSlice'

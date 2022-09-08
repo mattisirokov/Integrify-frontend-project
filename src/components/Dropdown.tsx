@@ -1,11 +1,11 @@
 import React from 'react'
-import { FormControl } from '@mui/material'
-import { MenuItem } from '@mui/material'
-import { Select } from '@mui/material'
-import { InputLabel } from '@mui/material'
+import { FormControl, MenuItem, Select, InputLabel } from '@mui/material'
+import { AppDispatch } from '../redux/store'
+import { useDispatch } from 'react-redux'
+import { SortedNames, SortedPopulation } from '../redux/slices/fetchSlice'
 
-export default function sortDropdown() {
-  //const dispatch = useDispatch<AppDispatch>()
+export default function SortingDropdown() {
+  const dispatch = useDispatch<AppDispatch>()
 
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -20,13 +20,26 @@ export default function sortDropdown() {
           <em>None</em>
         </MenuItem>
         <MenuItem
-          value="A-Z" /*onClick={() => dispatch(SortedNames(`A-to-Z`))}*/
+          value="A-to-Z"
+          onClick={() => dispatch(SortedNames(`A-to-Z`))}
         >
           Sort name A-Z
         </MenuItem>
-        <MenuItem value="Z-A">Sort name Z-A</MenuItem>
-        <MenuItem value="Small-Large">Population small-large</MenuItem>
-        <MenuItem value="Large-Small">Population large-small</MenuItem>
+        <MenuItem value="Z-A" onClick={() => dispatch(SortedNames(`Z-to-A`))}>
+          Sort name Z-A
+        </MenuItem>
+        <MenuItem
+          value="Small-Large"
+          onClick={() => dispatch(SortedPopulation('small-to-large'))}
+        >
+          Population small-large
+        </MenuItem>
+        <MenuItem
+          value="Large-Small"
+          onClick={() => dispatch(SortedPopulation('large-to-small'))}
+        >
+          Population large-small
+        </MenuItem>
       </Select>
     </FormControl>
   )
