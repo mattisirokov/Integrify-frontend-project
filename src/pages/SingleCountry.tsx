@@ -47,7 +47,7 @@ export default function SingleCountry() {
         alignItems="center"
         minHeight="100vh"
       >
-        {countries.countries.find((country) => (
+        {countries.countries.map((country) => (
           <Card sx={{ maxWidth: 345 }}>
             <CardMedia
               component="img"
@@ -72,7 +72,7 @@ export default function SingleCountry() {
                 <ListItem>
                   <ListItemText primary="Capital(s)" />
                   <ListItemText
-                    secondary={Object.values(country.capital).find(
+                    secondary={Object.values(country.capital).map(
                       (capital) => capital
                     )}
                   />
