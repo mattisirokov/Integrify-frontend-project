@@ -7,6 +7,14 @@ import { SortedNames, SortedPopulation } from '../redux/slices/fetchSlice'
 export default function SortingDropdown() {
   const dispatch = useDispatch<AppDispatch>()
 
+  const handleSortNames = (action: string) => {
+    dispatch(SortedNames(action))
+  }
+
+  const handleSortPopulation = (action: string) => {
+    dispatch(SortedPopulation(action))
+  }
+
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
       <InputLabel id="demo-select-small">Sort by</InputLabel>
@@ -21,22 +29,34 @@ export default function SortingDropdown() {
         </MenuItem>
         <MenuItem
           value="A-to-Z"
-          onClick={() => dispatch(SortedNames(`A-to-Z`))}
+          onClick={() => {
+            handleSortNames('A-to-Z')
+          }}
         >
           Sort name A-Z
         </MenuItem>
-        <MenuItem value="Z-A" onClick={() => dispatch(SortedNames(`Z-to-A`))}>
+
+        <MenuItem
+          value="Z-A"
+          onClick={() => {
+            handleSortNames('Z-to-A')
+          }}
+        >
           Sort name Z-A
         </MenuItem>
         <MenuItem
           value="Small-Large"
-          onClick={() => dispatch(SortedPopulation('small-to-large'))}
+          onClick={() => {
+            handleSortPopulation('small-to-large')
+          }}
         >
           Population small-large
         </MenuItem>
         <MenuItem
           value="Large-Small"
-          onClick={() => dispatch(SortedPopulation('large-to-small'))}
+          onClick={() => {
+            handleSortPopulation('large-to-small')
+          }}
         >
           Population large-small
         </MenuItem>
