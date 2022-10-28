@@ -25,10 +25,12 @@ export type Country = {
 
 export interface countriesState {
   countries: Country[]
+  isLoading: boolean
 }
 
 const initialState: countriesState = {
   countries: [],
+  isLoading: false,
 }
 
 //fetches all countries
@@ -107,6 +109,12 @@ export const fetchSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchCountriesThunk.fulfilled, (state, action) => {
       state.countries = action.payload.data
+    })
+    builder.addCase(fetchCountriesThunk.pending, (state, action) => {
+      state.isLoading = true
+    })
+    builder.addCase(fetchCountriesThunk.rejected, (state, action) => {
+      state.isLoading = false
     })
   },
 })
