@@ -10,7 +10,7 @@ import {
   IconButton,
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import StyledBadge from '@mui/material/Badge'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -24,7 +24,8 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '1px solid #ddf472',
+  borderRadius: '5px',
   boxShadow: 24,
   p: 4,
 }
@@ -43,8 +44,8 @@ export default function BasicModal() {
   return (
     <div>
       <IconButton onClick={handleOpen}>
-        <StyledBadge badgeContent={items.length} color="secondary">
-          <ShoppingCartIcon />
+        <StyledBadge badgeContent={items.length} color="primary">
+          <FavoriteBorderIcon />
         </StyledBadge>
       </IconButton>
       <Modal
@@ -55,21 +56,21 @@ export default function BasicModal() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Shopping cart
+            Your travel wishlist
           </Typography>
 
           <List>
             {items.length === 0 ? (
               <ListItem>
-                <ListItemText secondary="Your cart is currently empty" />
+                <ListItemText secondary="Add something nice to your wishlist" />
               </ListItem>
             ) : (
-              items.map((item: any) => (
+              items.map((country: any) => (
                 <ListItem>
                   <ListItemAvatar>
                     <img
-                      src={item.flags.png}
-                      alt={item.name.common}
+                      src={country.flags.png}
+                      alt={country.name.common}
                       style={{
                         width: '35px',
                         height: '35px',
@@ -77,11 +78,11 @@ export default function BasicModal() {
                       }}
                     ></img>
                   </ListItemAvatar>
-                  <ListItemText primary={item.name.common} />
+                  <ListItemText primary={country.name.common} />
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => handleRemoveFromCart(item)}
+                    onClick={() => handleRemoveFromCart(country)}
                   >
                     <DeleteIcon />
                   </IconButton>

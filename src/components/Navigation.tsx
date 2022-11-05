@@ -10,8 +10,6 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { ColorModeContext } from '../context/ColorModeContext'
 
-import SearchBar from './SearchBar'
-import Dropdown from './Dropdown'
 import CartModal from './CartModal'
 
 export default function SearchAppBar() {
@@ -38,9 +36,6 @@ export default function SearchAppBar() {
             )}
           </IconButton>
           <CartModal />
-
-          <Dropdown />
-          <SearchBar />
         </Toolbar>
       </AppBar>
     </Box>

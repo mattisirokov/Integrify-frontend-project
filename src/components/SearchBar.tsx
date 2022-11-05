@@ -1,12 +1,16 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { fetchCountrySearch } from '../redux/slices/fetchSlice'
+import {
+  fetchCountrySearch,
+  fetchCountriesThunk,
+} from '../redux/slices/fetchSlice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../redux/store'
 import { styled, alpha } from '@mui/material/styles'
 import React from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase'
+import { Box, Button } from '@mui/material'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,9 +60,13 @@ export default function SearchBar() {
 
   const searchHandler = (e: any) => {
     setTerm(e.target.value)
-    if (term !== '') {
+    if (term === '') {
       dispatch(fetchCountrySearch(term))
     }
+  }
+  //dispatch(fetchCountriesThunk()) onClick
+  const handleClear = () => {
+    dispatch(fetchCountriesThunk())
   }
 
   useEffect(() => {
@@ -66,13 +74,23 @@ export default function SearchBar() {
   }, [dispatch, term])
 
   return (
-    <div>
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+      }}
+    >
       <Search>
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
-        <StyledInputBase onChange={searchHandler} placeholder="search" />
+        <StyledInputBase onChange={searchHandler} placeholder="search..." />
       </Search>
-    </div>
+      <Button variant="text" sx={{ ml: 1 }} onClick={() => handleClear()}>
+        Clear
+      </Button>
+    </Box>
   )
 }

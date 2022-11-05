@@ -47,7 +47,7 @@ export default function SingleCountry() {
         alignItems="center"
         minHeight="100vh"
       >
-        {countries.countries.map((country) => (
+        {countries.allcountries.map((country) => (
           <Card sx={{ maxWidth: 345 }}>
             <CardMedia
               component="img"

@@ -29,9 +29,7 @@ export default function SortingDropdown() {
         </MenuItem>
         <MenuItem
           value="A-to-Z"
-          onClick={() => {
-            handleSortNames('A-to-Z')
-          }}
+          onClick={() => dispatch(SortedNames('`A-to-Z'))}
         >
           Sort name A-Z
         </MenuItem>
