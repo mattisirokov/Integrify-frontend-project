@@ -1,25 +1,23 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { fetchCountryThunk } from '../redux/slices/fetchSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../redux/store'
-import { Link } from 'react-router-dom'
-import { addToCart } from '../redux/slices/cartSlice'
 import Navigation from '../components/Navigation'
-import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
-import { IconButton } from '@mui/material'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 
-import Grid from '@mui/material/Grid'
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
-import Button from '@mui/material/Button'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { addToCart } from '../redux/slices/cartSlice'
+import { fetchCountryThunk } from '../redux/slices/fetchSlice'
+import { AppDispatch, RootState } from '../redux/store'
+import {
+  Box,
+  Typography,
+  Grid,
+  CardContent,
+  Card,
+  Button,
+  styled,
+} from '@mui/material'
+import CountryCounter from '../components/CountryCounter'
+import PopulationCard from '../components/PopulationCard'
+import AreaCounter from '../components/AreaCounter'
 
 type Parameter = {
   name: string
@@ -27,11 +25,40 @@ type Parameter = {
 
 export default function SingleCountry() {
   const dispatch = useDispatch<AppDispatch>()
+
   const { countries } = useSelector((state: RootState) => state)
-  const { name } = useParams<Parameter>()
+  const { name } = useParams<{ name: string }>()
+  const country = countries.allcountries.find(
+    (country) => country.name.common === name
+  )
+
   const handleAddToCart = (country: any) => {
     dispatch(addToCart(country))
   }
+
+  const MainButton = styled(Button)({
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '6px 12px',
+    color: 'primary',
+    lineHeight: 1.5,
+    backgroundColor: '#ddf472',
+    fontFamily: ['poppins'].join(','),
+    '&:hover': {
+      backgroundColor: 'white',
+      borderColor: '#0062cc',
+      boxShadow: 'none',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#0062cc',
+      borderColor: '#005cbf',
+    },
+    '&:focus': {
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+    },
+  })
 
   useEffect(() => {
     dispatch(fetchCountryThunk(name))
@@ -40,75 +67,131 @@ export default function SingleCountry() {
   return (
     <div>
       <Navigation />
-      <Grid
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
-        {countries.allcountries.map((country) => (
-          <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
-              component="img"
-              height="240"
-              width="345"
-              image={country.flags.png}
-              alt={country.name.common}
-            />
 
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {country.name.common}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {country.region}
-              </Typography>
-              <List>
-                <ListItem>
-                  <ListItemText primary="Fifa code" />
-                  <ListItemText secondary={country.fifa} />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="Capital(s)" />
-                  <ListItemText
-                    secondary={Object.values(country.capital).map(
-                      (capital) => capital
-                    )}
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemText primary="Area" />
-                  <ListItemText secondary={country.area} />
-                </ListItem>
-              </List>
-            </CardContent>
+      <Box sx={{ mx: '1rem' }}>
+        <Box sx={{ m: '1rem', mx: '1rem' }} />
 
-            <CardActions>
-              <Grid container spacing={2} columns={16}>
-                <Grid item xs={8}>
-                  <Link to="/">
-                    <Button
-                      variant="outlined"
-                      startIcon={<KeyboardArrowLeftIcon />}
-                    >
-                      Home
-                    </Button>
-                  </Link>
-                </Grid>
-                <Grid item xs={8}>
-                  <IconButton
-                    aria-label="add to shopping cart"
-                    onClick={() => handleAddToCart(country)}
-                  >
-                    <AddShoppingCartIcon />
-                  </IconButton>
-                </Grid>
-              </Grid>
-            </CardActions>
-          </Card>
-        ))}
-      </Grid>
+        <Typography variant="h4" sx={{ mb: 7, mt: 7, ml: 1 }}>
+          Hey{' '}
+          <span role="img" aria-label="sheep">
+            👋
+          </span>
+          {'  '}
+          welcome to {country?.name.common}!
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={4} lg={4}>
+            <PopulationCard />
+          </Grid>
+
+          <Grid item xs={12} md={4} lg={4}>
+            <CountryCounter />
+          </Grid>
+          <Grid item xs={12} md={4} lg={4}>
+            <AreaCounter />
+          </Grid>
+          <Grid item xs={12} md={4} lg={12}>
+            <Box
+              sx={{
+                mt: '2rem',
+                mb: '2rem',
+                flexGrow: 1,
+                borderBottom: 1,
+                borderRadius: '5px',
+                borderColor: 'grey.500',
+                display: 'flex',
+                justifyContent: 'space-between',
+                padding: '10px',
+              }}
+            >
+              <Box>
+                <MainButton variant="outlined" sx={{ mt: 3 }} href={`/`}>
+                  Home
+                </MainButton>
+              </Box>
+              <Box>
+                <Button
+                  variant="text"
+                  color="success"
+                  sx={{ ml: 1 }}
+                  onClick={() => handleAddToCart(country)}
+                >
+                  Add to wishlist
+                </Button>
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} md={4} lg={5}>
+            <Card variant="outlined">
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  Welcome to our beautiful capital city
+                </Typography>
+                <Typography variant="h5" component="div">
+                  {country?.capital}
+                </Typography>
+
+                <Typography variant="body2">
+                  A beautiful city in
+                  <br />
+                  {country?.name.common} you should visit!
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={4} lg={7}>
+            <Card variant="outlined">
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  We love our football
+                </Typography>
+                <Typography variant="h5" component="div">
+                  {country?.fifa}
+                </Typography>
+
+                <Typography variant="body2">
+                  Is the national football team of
+                  <br />
+                  {country?.name.common}, come watch a game!
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={4} lg={12}>
+            <Card variant="outlined">
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  Did you know that the area of {country?.name.common} is
+                </Typography>
+                <Typography variant="h5" component="div">
+                  {country?.area} km²
+                </Typography>
+
+                <Typography variant="body2">
+                  We're just part of the puzzle
+                  <br />
+                  that makes up {country?.region}!
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Box>
     </div>
   )
 }

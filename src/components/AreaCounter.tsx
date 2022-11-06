@@ -21,16 +21,16 @@ export default function Langauge() {
         <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="overline">
-              NUMBER OF LANGUAGES
+              THE LAND AREA OF THE WORLD
             </Typography>
             <Typography color="textPrimary" variant="h4">
-              57
+              {countries.reduce((acc, curr) => acc + curr.area, 0)}
             </Typography>
           </Grid>
           <Grid item>
             <Avatar
               sx={{
-                backgroundColor: '#ddf472',
+                backgroundColor: 'highlight',
                 height: 56,
                 width: 56,
               }}

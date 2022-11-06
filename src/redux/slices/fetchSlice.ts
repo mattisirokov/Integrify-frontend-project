@@ -4,6 +4,7 @@ import { countriesState } from '../../types'
 
 const initialState: countriesState = {
   allcountries: [],
+
   isLoading: false,
 }
 

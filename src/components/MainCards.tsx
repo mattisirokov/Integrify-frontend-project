@@ -14,9 +14,34 @@ import {
   CardMedia,
   Grid,
   IconButton,
+  styled,
   Typography,
 } from '@mui/material'
 import { addToCart } from '../redux/slices/cartSlice'
+
+const MainButton = styled(Button)({
+  boxShadow: 'none',
+  textTransform: 'none',
+  fontSize: 16,
+  padding: '6px 12px',
+  color: 'primary',
+  lineHeight: 1.5,
+  backgroundColor: '#ddf472',
+  fontFamily: ['poppins'].join(','),
+  '&:hover': {
+    backgroundColor: 'white',
+    borderColor: '#0062cc',
+    boxShadow: 'none',
+  },
+  '&:active': {
+    boxShadow: 'none',
+    backgroundColor: '#0062cc',
+    borderColor: '#005cbf',
+  },
+  '&:focus': {
+    boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+  },
+})
 
 export default function MainTable() {
   const dispatch = useDispatch<AppDispatch>()
@@ -77,13 +102,13 @@ export default function MainTable() {
                         alignItems: 'center',
                       }}
                     >
-                      <Button
+                      <MainButton
                         variant="outlined"
                         sx={{ mt: 3 }}
                         href={`/countries/${country.name.common}`}
                       >
                         Learn more
-                      </Button>
+                      </MainButton>
 
                       <IconButton
                         aria-label="add to favorites"

@@ -3,9 +3,9 @@ import Navigation from '../components/Navigation'
 import MainCards from '../components/MainCards'
 import PopulationCard from '../components/PopulationCard'
 import CountryCounter from '../components/CountryCounter'
-import LanguageCounter from '../components/LanguageCounter'
 import FilterBar from '../components/FilterBar'
 import { Box, Grid, Typography } from '@mui/material'
+import AreaCounter from '../components/AreaCounter'
 
 const Home = () => {
   return (
@@ -31,7 +31,7 @@ const Home = () => {
             <CountryCounter />
           </Grid>
           <Grid item xs={12} md={4} lg={4}>
-            <LanguageCounter />
+            <AreaCounter />
           </Grid>
 
           <Grid item xs={12} md={4} lg={12}>

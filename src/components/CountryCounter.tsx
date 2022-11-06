@@ -33,7 +33,7 @@ export default function Population() {
           <Grid item>
             <Avatar
               sx={{
-                backgroundColor: '#ddf472',
+                backgroundColor: 'highlight',
                 height: 56,
                 width: 56,
               }}

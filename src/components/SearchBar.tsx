@@ -88,7 +88,12 @@ export default function SearchBar() {
         </SearchIconWrapper>
         <StyledInputBase onChange={searchHandler} placeholder="search..." />
       </Search>
-      <Button variant="text" sx={{ ml: 1 }} onClick={() => handleClear()}>
+      <Button
+        variant="text"
+        color="success"
+        sx={{ ml: 1 }}
+        onClick={() => handleClear()}
+      >
         Clear
       </Button>
     </Box>
