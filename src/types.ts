@@ -17,7 +17,8 @@ export type Country = {
   region: string
   fifa: string
   population: number
-  area: string
+  area: number
+  nativeName: string
 }
 
 export interface countriesState {
