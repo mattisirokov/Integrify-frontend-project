@@ -18,4 +18,4 @@ Here is the tech stack that I used:
 
 and more!
 
-Want to see the deployed version? Here you go: https://counties-app-mattisirokov.vercel.app/
+Want to see the deployed version? Here you go: https://integrify-frontend-project.vercel.app/
