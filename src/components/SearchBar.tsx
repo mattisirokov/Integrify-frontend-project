@@ -1,16 +1,19 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useState } from 'react'
 import {
   fetchCountryThunk,
   fetchCountriesThunk,
 } from '../redux/slices/countriesSlice'
+
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../redux/store'
 import { styled, alpha } from '@mui/material/styles'
+
 import React from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase'
 import { Box, Button } from '@mui/material'
+import { debounce } from 'lodash'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -62,6 +65,8 @@ export default function SearchBar() {
     setTerm(e.target.value)
   }
 
+  const debouncedEventHandler = useMemo(() => debounce(searchHandler, 300), [])
+
   const handleClear = () => {
     dispatch(fetchCountriesThunk())
   }
@@ -87,7 +92,10 @@ export default function SearchBar() {
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
-        <StyledInputBase onChange={searchHandler} placeholder="search..." />
+        <StyledInputBase
+          onChange={debouncedEventHandler}
+          placeholder="search..."
+        />
       </Search>
       <Button
         variant="text"
