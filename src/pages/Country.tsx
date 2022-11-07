@@ -25,7 +25,6 @@ type Parameter = {
 
 export default function SingleCountry() {
   const dispatch = useDispatch<AppDispatch>()
-
   const { countries } = useSelector((state: RootState) => state)
   const { name } = useParams<{ name: string }>()
   const country = countries.allcountries.find(

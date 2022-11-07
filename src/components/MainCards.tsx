@@ -9,7 +9,6 @@ import {
   Box,
   Button,
   Card,
-  CardActionArea,
   CardContent,
   CardMedia,
   Grid,
@@ -59,66 +58,64 @@ export default function MainTable() {
     <div>
       <Box sx={{ mt: 3 }}>
         <Grid container spacing={5}>
-          {countries.allcountries.map((country: any) => (
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+          {countries.allcountries.map((country) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={country.name.common}>
               <Card sx={{ maxWidth: 345, minHeight: 310 }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="150"
-                    image={country.flags.png}
-                    alt="{country.name.common}"
-                  />
-                  <CardContent>
-                    <Box sx={{ mb: 1 }}>
-                      <Typography
-                        gutterBottom
-                        variant="subtitle2"
-                        component="div"
-                      >
-                        {country.region}
-                      </Typography>
-                    </Box>
-                    <Typography gutterBottom variant="h6" component="div">
-                      {country.name.common}
-                    </Typography>
-                    <Box sx={{ mt: 2 }}>
-                      <Typography variant="body2" color="text.secondary">
-                        Population: {country.population}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Capital: {country.capital}
-                      </Typography>
-                    </Box>
-
-                    <Box
-                      sx={{
-                        flexGrow: 1,
-
-                        borderRadius: '5px',
-                        borderColor: 'grey.500',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}
+                <CardMedia
+                  component="img"
+                  height="150"
+                  image={country.flags.png}
+                  alt="{country.name.common}"
+                />
+                <CardContent>
+                  <Box sx={{ mb: 1 }}>
+                    <Typography
+                      gutterBottom
+                      variant="subtitle2"
+                      component="div"
                     >
-                      <MainButton
-                        variant="outlined"
-                        sx={{ mt: 3 }}
-                        href={`/countries/${country.name.common}`}
-                      >
-                        Learn more
-                      </MainButton>
+                      {country.region}
+                    </Typography>
+                  </Box>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {country.name.common}
+                  </Typography>
+                  <Box sx={{ mt: 2 }}>
+                    <Typography variant="body2" color="text.secondary">
+                      Population: {country.population}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Capital: {country.capital}
+                    </Typography>
+                  </Box>
 
-                      <IconButton
-                        aria-label="add to favorites"
-                        onClick={() => handleAddToCart(country)}
-                      >
-                        <FavoriteBorderIcon />
-                      </IconButton>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
+                  <Box
+                    sx={{
+                      flexGrow: 1,
+
+                      borderRadius: '5px',
+                      borderColor: 'grey.500',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <MainButton
+                      variant="outlined"
+                      sx={{ mt: 3 }}
+                      href={`/countries/${country.name.common}`}
+                    >
+                      Learn more
+                    </MainButton>
+
+                    <IconButton
+                      aria-label="add to favorites"
+                      onClick={() => handleAddToCart(country)}
+                    >
+                      <FavoriteBorderIcon />
+                    </IconButton>
+                  </Box>
+                </CardContent>
               </Card>
             </Grid>
           ))}
