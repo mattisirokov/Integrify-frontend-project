@@ -64,8 +64,8 @@ export default function Langauge() {
   )
   return (
     <div>
-      {countries.allcountries.length > 0
-        ? handleLanguageRender(countries.allcountries)
+      {countries.allCountries.length > 0
+        ? handleLanguageRender(countries.allCountries)
         : null}
     </div>
   )

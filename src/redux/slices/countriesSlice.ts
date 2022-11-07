@@ -4,7 +4,7 @@ import axios from 'axios'
 import { countriesState } from '../../types'
 
 const initialState: countriesState = {
-  allcountries: [],
+  allCountries: [],
   isLoading: false,
 }
 
@@ -41,35 +41,35 @@ export const countriesSlice = createSlice({
   initialState,
   reducers: {
     SortedNames: (state, action) => {
-      let sortedCountries = state.allcountries
+      let sortedCountries = state.allCountries
       if (action.payload === `A-to-Z`) {
-        sortedCountries = state.allcountries.sort((a, b) =>
+        sortedCountries = state.allCountries.sort((a, b) =>
           a.name.common.localeCompare(b.name.common)
         )
       }
       if (action.payload === `Z-to-A`) {
-        sortedCountries = state.allcountries.sort((a, b) =>
+        sortedCountries = state.allCountries.sort((a, b) =>
           b.name.common.localeCompare(a.name.common)
         )
       }
-      state.allcountries = sortedCountries
+      state.allCountries = sortedCountries
     },
     SortedPopulation: (state, action) => {
-      let sortedCountries = state.allcountries
+      let sortedCountries = state.allCountries
 
       if (action.payload === 'small-to-large') {
-        state.allcountries.sort((a, b) => a.population - b.population)
+        state.allCountries.sort((a, b) => a.population - b.population)
       }
       if (action.payload === 'large-to-small') {
-        state.allcountries.sort((a, b) => b.population - a.population)
+        state.allCountries.sort((a, b) => b.population - a.population)
       }
-      state.allcountries = sortedCountries
+      state.allCountries = sortedCountries
     },
   },
 
   extraReducers: (builder) => {
     builder.addCase(fetchCountriesThunk.fulfilled, (state, action) => {
-      state.allcountries = action.payload.data
+      state.allCountries = action.payload.data
     })
     builder.addCase(fetchCountriesThunk.pending, (state) => {
       state.isLoading = true
@@ -78,7 +78,7 @@ export const countriesSlice = createSlice({
       state.isLoading = false
     })
     builder.addCase(fetchCountryThunk.fulfilled, (state, action) => {
-      state.allcountries = action.payload.data
+      state.allCountries = action.payload.data
     })
     builder.addCase(fetchCountryThunk.pending, (state) => {
       state.isLoading = true

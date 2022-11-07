@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { addToCart } from '../redux/slices/cartSlice'
 import { fetchCountryThunk } from '../redux/slices/countriesSlice'
@@ -27,7 +27,7 @@ export default function SingleCountry() {
   const dispatch = useDispatch<AppDispatch>()
   const { countries } = useSelector((state: RootState) => state)
   const { name } = useParams<{ name: string }>()
-  const country = countries.allcountries.find(
+  const country = countries.allCountries.find(
     (country) => country.name.common === name
   )
 
@@ -104,8 +104,8 @@ export default function SingleCountry() {
               }}
             >
               <Box>
-                <MainButton variant="outlined" sx={{ mt: 3 }} href={`/`}>
-                  Home
+                <MainButton variant="outlined" sx={{ mt: 3 }}>
+                  <Link to={'/'}>Learn more</Link>
                 </MainButton>
               </Box>
               <Box>

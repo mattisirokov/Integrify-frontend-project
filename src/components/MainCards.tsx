@@ -59,7 +59,7 @@ export default function MainTable() {
     <div>
       <Box sx={{ mt: 3 }}>
         <Grid container spacing={5}>
-          {countries.allcountries.map((country) => (
+          {countries.allCountries.map((country) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={country.name.common}>
               <Card sx={{ maxWidth: 345, minHeight: 310 }}>
                 <CardMedia

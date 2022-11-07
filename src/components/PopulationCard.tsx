@@ -64,8 +64,8 @@ export default function Population() {
   )
   return (
     <div>
-      {countries.allcountries.length > 0
-        ? handlePopulationRender(countries.allcountries)
+      {countries.allCountries.length > 0
+        ? handlePopulationRender(countries.allCountries)
         : null}
     </div>
   )

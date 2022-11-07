@@ -21,7 +21,7 @@ export type Country = {
 }
 
 export interface countriesState {
-  allcountries: Country[]
+  allCountries: Country[]
   isLoading: boolean
 }
 
