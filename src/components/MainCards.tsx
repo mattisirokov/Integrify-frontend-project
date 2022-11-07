@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 
-import { fetchCountriesThunk } from '../redux/slices/fetchSlice'
+import { fetchCountriesThunk } from '../redux/slices/countriesSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
@@ -17,6 +17,7 @@ import {
   Typography,
 } from '@mui/material'
 import { addToCart } from '../redux/slices/cartSlice'
+import { Link } from 'react-router-dom'
 
 const MainButton = styled(Button)({
   boxShadow: 'none',
@@ -100,12 +101,10 @@ export default function MainTable() {
                       alignItems: 'center',
                     }}
                   >
-                    <MainButton
-                      variant="outlined"
-                      sx={{ mt: 3 }}
-                      href={`/countries/${country.name.common}`}
-                    >
-                      Learn more
+                    <MainButton variant="outlined" sx={{ mt: 3 }}>
+                      <Link to={`/countries/${country.name.common}`}>
+                        Learn more
+                      </Link>
                     </MainButton>
 
                     <IconButton

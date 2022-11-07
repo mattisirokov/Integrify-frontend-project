@@ -3,7 +3,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import InsertChartIcon from '@mui/icons-material/InsertChartOutlined'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCountriesThunk } from '../redux/slices/fetchSlice'
+import { fetchCountriesThunk } from '../redux/slices/countriesSlice'
 import { Country } from '../types'
 import { AppDispatch, RootState } from '../redux/store'
 

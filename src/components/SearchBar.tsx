@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
 import {
-  fetchCountrySearch,
+  fetchCountryThunk,
   fetchCountriesThunk,
-} from '../redux/slices/fetchSlice'
+} from '../redux/slices/countriesSlice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../redux/store'
 import { styled, alpha } from '@mui/material/styles'
@@ -58,19 +58,20 @@ export default function SearchBar() {
   const dispatch = useDispatch<AppDispatch>()
   const [term, setTerm] = useState('')
 
-  const searchHandler = (e: any) => {
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value)
-    if (term === '') {
-      dispatch(fetchCountrySearch(term))
-    }
   }
-  //dispatch(fetchCountriesThunk()) onClick
+
   const handleClear = () => {
     dispatch(fetchCountriesThunk())
   }
 
   useEffect(() => {
-    dispatch(fetchCountrySearch(term))
+    if (!term) {
+      dispatch(fetchCountriesThunk())
+    } else {
+      dispatch(fetchCountryThunk(term))
+    }
   }, [dispatch, term])
 
   return (

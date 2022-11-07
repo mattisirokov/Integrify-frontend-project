@@ -4,20 +4,13 @@ import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import InsertChartIcon from '@mui/icons-material/InsertChartOutlined'
 
-import { fetchCountriesThunk } from '../redux/slices/fetchSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../redux/store'
-import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../redux/store'
 import { Country } from '../types'
 
 export default function Population() {
-  const dispatch = useDispatch<AppDispatch>()
   const { countries } = useSelector((state: RootState) => state)
-
-  useEffect(() => {
-    dispatch(fetchCountriesThunk())
-  }, [dispatch])
-
+  console.log(countries.allcountries.length)
   const handlePopulationRender = (countries: Country[]) => (
     <Card>
       <CardContent>

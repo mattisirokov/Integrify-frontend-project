@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+
 import { countriesState } from '../../types'
 
 const initialState: countriesState = {
   allcountries: [],
-
   isLoading: false,
 }
 
@@ -24,7 +24,7 @@ export const fetchCountriesThunk = createAsyncThunk(
 
 //fetches single country for the SingleCountry component
 export const fetchCountryThunk = createAsyncThunk(
-  'countries/fetch',
+  'countries/fetchOne',
   async (name: string) => {
     const URL = `https://restcountries.com/v3.1/name/${name}`
     const response = await axios.get(URL)
@@ -36,64 +36,59 @@ export const fetchCountryThunk = createAsyncThunk(
   }
 )
 
-//fetches countries for the search component
-export const fetchCountrySearch = createAsyncThunk(
-  'countries/fetch',
-  async (term: string) => {
-    const URL = `https://restcountries.com/v3.1/name/${term}/?fields=name,languages,currencies,flags,capital,population,fifa`
-    const response = await axios.get(URL)
-
-    return {
-      data: response.data,
-      status: response.status,
-    }
-  }
-)
-
-//sorting slice
-export const sortedCountries = createSlice({
-  name: 'dropdownSort',
+export const countriesSlice = createSlice({
+  name: 'countries',
   initialState,
   reducers: {
     SortedNames: (state, action) => {
+      let sortedCountries = state.allcountries
       if (action.payload === `A-to-Z`) {
-        state.allcountries.sort((a, b) =>
+        sortedCountries = state.allcountries.sort((a, b) =>
           a.name.common.localeCompare(b.name.common)
         )
-      } else if (action.payload === `Z-to-A`) {
-        state.allcountries.sort((a, b) =>
+      }
+      if (action.payload === `Z-to-A`) {
+        sortedCountries = state.allcountries.sort((a, b) =>
           b.name.common.localeCompare(a.name.common)
         )
       }
+      state.allcountries = sortedCountries
     },
     SortedPopulation: (state, action) => {
+      let sortedCountries = state.allcountries
+
       if (action.payload === 'small-to-large') {
         state.allcountries.sort((a, b) => a.population - b.population)
-      } else if (action.payload === 'large-to-small') {
+      }
+      if (action.payload === 'large-to-small') {
         state.allcountries.sort((a, b) => b.population - a.population)
       }
+      state.allcountries = sortedCountries
     },
   },
-})
-
-export const fetchSlice = createSlice({
-  name: 'countries',
-  initialState,
-  reducers: {},
 
   extraReducers: (builder) => {
     builder.addCase(fetchCountriesThunk.fulfilled, (state, action) => {
       state.allcountries = action.payload.data
     })
-    builder.addCase(fetchCountriesThunk.pending, (state, action) => {
+    builder.addCase(fetchCountriesThunk.pending, (state) => {
       state.isLoading = true
     })
-    builder.addCase(fetchCountriesThunk.rejected, (state, action) => {
+    builder.addCase(fetchCountriesThunk.rejected, (state) => {
+      state.isLoading = false
+    })
+    builder.addCase(fetchCountryThunk.fulfilled, (state, action) => {
+      state.allcountries = action.payload.data
+    })
+    builder.addCase(fetchCountryThunk.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(fetchCountryThunk.rejected, (state) => {
       state.isLoading = false
     })
   },
 })
 
-export const { SortedNames, SortedPopulation } = sortedCountries.actions
+export const { SortedNames, SortedPopulation } = countriesSlice.actions
 
-export default fetchSlice.reducer
+export default countriesSlice.reducer

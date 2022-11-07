@@ -1,11 +1,11 @@
-import Navigation from '../components/Navigation'
-
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+
 import { addToCart } from '../redux/slices/cartSlice'
-import { fetchCountryThunk } from '../redux/slices/fetchSlice'
+import { fetchCountryThunk } from '../redux/slices/countriesSlice'
 import { AppDispatch, RootState } from '../redux/store'
+import Navigation from '../components/Navigation'
 import {
   Box,
   Typography,

@@ -18,7 +18,6 @@ export type Country = {
   fifa: string
   population: number
   area: number
-  nativeName: string
 }
 
 export interface countriesState {
@@ -26,19 +25,7 @@ export interface countriesState {
   isLoading: boolean
 }
 
-export interface countryState {
-  country: Country
-  isLoading: boolean
-}
-
-export type Cart = {
-  name: {
-    common: string
-  }
-  flags: {
-    png: string
-  }
-}
+export type Cart = Pick<Country, 'name' | 'flags'>
 
 export interface CartState {
   items: Cart[]

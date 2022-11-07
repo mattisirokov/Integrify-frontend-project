@@ -1,10 +1,11 @@
 import React from 'react'
+import { Box, Grid, Typography } from '@mui/material'
+
 import Navigation from '../components/Navigation'
 import MainCards from '../components/MainCards'
 import PopulationCard from '../components/PopulationCard'
 import CountryCounter from '../components/CountryCounter'
 import FilterBar from '../components/FilterBar'
-import { Box, Grid, Typography } from '@mui/material'
 import AreaCounter from '../components/AreaCounter'
 
 const Home = () => {
